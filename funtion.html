@@ -1,0 +1,142 @@
+<html>
+<head>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+        #container {
+            width : 15cm;
+            height: 15cm;
+            margin: 8px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container" style=""></div>
+<script type="text/javascript" src="./lib/flotr2/flotr2.min.js"></script>
+<script type="text/javascript">
+    (function () {
+        /*
+        var
+            container = document.getElementById('container'),
+            data = [],
+            graph;
+         i =0 ;
+        // Sample the sine function
+        for (i = 0; i < 4 * Math.PI; i += 0.2) {
+            data.push([i, Math.sin(i)]);
+        }
+
+        var
+            d1 = [[0, 3], [4, 8], [8, 5], [9, 13]], // First data series
+            d2 = [];                               // Second data series
+            i =0 ;
+
+        // Generate first data set
+        for (i = 0; i < 14; i += 0.5) {
+            d2.push([i, Math.cos(i)]);
+        }
+
+
+
+        // Draw Graph
+        graph = Flotr.draw(container, [ d1,d2 ], {
+            yaxis : {
+                max : 2,
+                min : -2
+            }
+        });
+
+
+        */
+
+        alert("Pruebas!!");
+        var
+            container = document.getElementById('container'),
+            d1 = [],
+            d2 = [],
+            d3 = [],
+            graph, i;
+
+        for (i = 0; i < 20; i += 0.5) {
+            d1.push([i, 2*i]);
+            d2.push([i, i*1.5+1.5*Math.sin(i)]);
+            d3.push([i, 3*Math.cos(i)+10]);
+        }
+
+        data = [
+            { data : d1, label :'x + sin(x+&pi;)' },
+            { data : d2, label :'x' },
+            { data : d3, label :'15 - cos(x)B' }
+        ];
+
+
+        // This function prepend each label with 'y = '
+        function labelFn (label) {
+            return 'y = ' + label;
+        }
+/*
+        graph = Flotr.draw(
+            container,
+            [
+                {
+                    data : d1,
+                    mouse : { track : false } // Disable mouse tracking for d1
+                },
+                d2,
+                d3
+            ],
+            {
+                mouse : {
+                    track           : true, // Enable mouse tracking
+                    lineColor       : 'purple',
+                    relative        : true,
+                    position        : 'ne',
+                    sensibility     : 1,
+                    trackDecimals   : 2,
+                    trackFormatter  : function (o) { return 'x = ' + o.x +', y = ' + o.y; }
+                },
+                crosshair : {
+                    mode : 'xy'
+                }
+            }
+        );
+        */
+
+        graph = Flotr.draw(
+            container,
+            [
+                {
+                    data : d1,
+                    mouse : { track : false } // Disable mouse tracking for d1
+                },
+                d2,
+                d3
+            ],
+            {
+            legend : {
+                position : 'se',            // Position the legend 'south-east'.
+                labelFormatter : labelFn,   // Format the labels.
+                backgroundColor : '#D2E8FF' // A light blue background color.
+            },
+            HtmlText : true ,
+                mouse : {
+                    track           : true, // Enable mouse tracking
+                    lineColor       : 'purple',
+                    relative        : true,
+                    position        : 'ne',
+                    sensibility     : 1,
+                    trackDecimals   : 2,
+                    trackFormatter  : function (o) { return 'x = ' + o.x +', y = ' + o.y; }
+                },
+                crosshair : {
+                    mode : 'xy'
+                }
+            }
+        );
+    })();
+</script>
+</body>
+</html>
